@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Parameters:
+  DynamoAttribute:
+    Type: String
+
+  DynamoTableName:
+    Type: String
+
+Resources:
+  Dynamo-desdecero:
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - AttributeName: !Ref DynamoAttribute
+          AttributeType: S
+      KeySchema:
+        - AttributeName: !Ref DynamoAttribute
+          KeyType: HASH
+      BillingMode: PAY_PER_REQUEST
+      SSESpecification: 
+        SSEEEnable: true
+      TableName: !Ref DynamoTableName
+
+Outputs:
+  DynamoName: !Ref Dynamo-desdecero
+  Export:
+    Name: DynamoTableName
